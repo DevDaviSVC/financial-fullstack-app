@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, html {
+    background-image: url("bg.png");
+    height: 100%;
+}
+
+.f-blue {
+    background-color: #1976d2 ;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1280px;
+}
