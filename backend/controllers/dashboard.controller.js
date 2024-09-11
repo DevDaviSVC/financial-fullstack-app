@@ -145,3 +145,41 @@ export const deleteCollaborator = async (req, res) => {
         res.status(500).json({error: "Internal Server Error."});
     }
 };
+
+export const getAllDashboards = async (req, res) => {
+    try {
+        
+        const { userId } = req.params;
+
+        // Verify if user exists
+        const user = await User.findOne({_id: userId});
+        if (!user) return res.status(404).json({error: "User does not exist!"});
+
+        // Getting user dashboards
+        const dashboards = await Dashboard.find({ collaborators: { $elemMatch: { $eq: userId } } });
+        res.status(200).json(dashboards);
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error: "Internal Server Error."});
+    }
+}
+
+export const getAllAdminDashboards = async (req, res) => {
+    try {
+        
+        const { userId } = req.params;
+
+        // Verify if user exists
+        const user = await User.findOne({_id: userId});
+        if (!user) return res.status(404).json({error: "User does not exist!"});
+
+        // Getting user dashboards
+        const dashboards = await Dashboard.find({ admins: { $elemMatch: { $eq: userId } } });
+        res.status(200).json(dashboards);
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error: "Internal Server Error."});
+    }
+}

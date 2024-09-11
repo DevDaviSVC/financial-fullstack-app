@@ -1,8 +1,10 @@
 import express from "express";
-import { addCollaborator, createDashboard, deleteCollaborator, deleteDashboard, updateDashboardItems } from "../controllers/dashboard.controller.js";
+import { addCollaborator, createDashboard, deleteCollaborator, deleteDashboard, getAllAdminDashboards, getAllDashboards, updateDashboardItems } from "../controllers/dashboard.controller.js";
 
 const router = express.Router();
 
+router.get("/:userId", getAllDashboards);
+router.get("/admin/:userId", getAllAdminDashboards);
 router.post("/create/:userId", createDashboard);
 router.post("/collaborators/:dashboardId", addCollaborator);
 router.delete("/delete/:dashboardId/:userId", deleteDashboard);

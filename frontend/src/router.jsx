@@ -3,6 +3,7 @@ import RootLayout from "./pages/RootLayout";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Home from "./pages/Home";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 const router = createBrowserRouter([{
     path: "/",
@@ -19,6 +20,15 @@ const router = createBrowserRouter([{
         {
             path: "signup",
             element: <Signup />
+        },
+        {
+            path: "dashboard/",
+            children: [
+                {
+                    index: true,
+                    element: <Dashboard />
+                }
+            ]
         }
     ]
 }]);

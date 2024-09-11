@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 body, html {
-    background-image: url("bg.png");
+    background-image: url("/bg.png");
     height: 100%;
+    background-attachment: fixed;
 }
 
 .f-blue {
@@ -14,4 +15,8 @@ body, html {
 .container {
     margin: 0 auto;
     max-width: 1280px;
+}
+
+#root {
+    min-height: 100vh;
 }

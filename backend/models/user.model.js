@@ -13,11 +13,6 @@ const userSchema = mongoose.Schema({
         type: String,
         default: "",
     },
-    dashboards: [
-        {
-            type: mongoose.Types.ObjectId
-        }
-    ],
     username: {
         type: String,
         required: true

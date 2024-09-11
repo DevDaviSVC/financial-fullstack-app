@@ -28,9 +28,9 @@ export default function Login() {
   }
 
   return (
-    <div className='text-center'>
-            <h1 className='text-5xl font-semibold'>Log into your account</h1>
-        <form className='bg-gray-950 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-50 p-8 max-w-[600px] mx-auto my-10 text-start shadow-xl'  onSubmit={handleSubmit}>
+    <div className='text-center pt-20 min-h-screen flex align-center flex-col justify-center'>
+        <h1 className='text-5xl font-semibold'>Log into your account</h1>
+        <form className='bg-gray-950 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-50 p-8 max-w-[400px] mx-auto my-10 text-start shadow-xl'  onSubmit={handleSubmit}>
             <div className='w-full pb-4'>
                 <label className='label-text px-2 text-white'>Username</label>
                 <input 
