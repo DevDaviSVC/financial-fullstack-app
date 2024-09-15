@@ -10,8 +10,7 @@ export const createDashboard = async (req, res) => {
         const newDashboard = {
             name,
             collaborators: [userId],
-            admins: [userId],
-            expenses: []
+            admins: [userId]
         };
 
         // verifies if the user exists
@@ -20,7 +19,7 @@ export const createDashboard = async (req, res) => {
 
         const dashboard = await Dashboard.create(newDashboard);
 
-        res.status(200).json({message: `Dashboard ${name} successfully created!`});
+        res.status(200).json({message: `Dashboard ${name} successfully created!`, dashboard});
     } catch (error) {
         console.log(error);
         res.status(500).json({error: "Internal Server Error."});
@@ -183,3 +182,26 @@ export const getAllAdminDashboards = async (req, res) => {
         res.status(500).json({error: "Internal Server Error."});
     }
 }
+
+export const getOneDashboard = async (req, res) => {
+    try {
+        const { userId, dashboardId } = req.params;
+
+        // Verify if user exists
+        const user = await User.findOne({_id: userId});
+        if (!user) return res.status(404).json({error: "User does not exist!"});
+
+        // Find dashboard
+        const dashboard = await Dashboard.findOne({
+            _id: dashboardId,
+            collaborators: {$elemMatch: {$eq: userId}}
+        }).populate("collaborators").populate("admins");
+        if (!dashboard) return res.status(404).json({error: "Dashboard not found!"});
+
+        res.status(200).json(dashboard);
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error: "Internal Server Error."});
+    }
+};
