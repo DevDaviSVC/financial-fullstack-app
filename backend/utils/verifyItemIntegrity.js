@@ -1,5 +1,5 @@
 const verifyItemIntegrity = (item) => {
-    if (!item.name || !item.value || !item.type || !item.author || !item.date) {
+    if (!item.name || !item.value || !item.type || !item.authorId || !item.id) {
         return false;
     }
 

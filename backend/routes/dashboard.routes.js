@@ -1,5 +1,5 @@
 import express from "express";
-import { addCollaborator, createDashboard, deleteCollaborator, deleteDashboard, getAllAdminDashboards, getAllDashboards, getOneDashboard, updateDashboardItems } from "../controllers/dashboard.controller.js";
+import { addCollaborator, createDashboard, deleteCollaborator, deleteDashboard, getAllAdminDashboards, getAllDashboards, getOneDashboard, updateDashboard } from "../controllers/dashboard.controller.js";
 
 const router = express.Router();
 
@@ -10,6 +10,6 @@ router.post("/create/:userId", createDashboard);
 router.post("/collaborators/:dashboardId", addCollaborator);
 router.delete("/delete/:dashboardId/:userId", deleteDashboard);
 router.put("/collaborators/:dashboardId", deleteCollaborator);
-router.put("/items/:userId", updateDashboardItems);
+router.put("/:userId", updateDashboard);
 
 export default router;

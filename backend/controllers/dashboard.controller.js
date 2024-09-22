@@ -53,7 +53,7 @@ export const deleteDashboard = async (req, res) => {
     }
 };
 
-export const updateDashboardItems = async (req, res) => {
+export const updateDashboard = async (req, res) => {
     try {
         
         const { dashboardId, items } = req.body;

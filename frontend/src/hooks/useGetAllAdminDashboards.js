@@ -2,23 +2,23 @@ import { useEffect, useState } from "react"
 import { useAuthContext } from "../contexts/authContext";
 import toast from "react-hot-toast";
 
-export const useGetAllDashboards = () => {
+export const useGetAllAdminDashboards = () => {
     const [loading, setLoading] = useState(false);
     const {authUser} = useAuthContext();
-    const [allDashboards, setAllDashboards] = useState([]);
+    const [allAdminDashboards, setAllAdminDashboards] = useState([]);
 
     useEffect(() => {
-        const getAllDashboards = async () => {
+        const getAllAdminDashboards = async () => {
             setLoading(true);
     
             try {
     
-                const response = await fetch(`http://localhost:5000/api/dashboard/${authUser._id}`);
+                const response = await fetch(`http://localhost:5000/api/dashboard/admin/${authUser._id}`);
                 const data = await response.json();
     
                 if (data.error) throw new Error(data.error);
             
-                setAllDashboards(data);
+                setAllAdminDashboards(data);
     
             } catch (error) {
                 console.error(error.message);
@@ -28,9 +28,9 @@ export const useGetAllDashboards = () => {
             }
         };
 
-        getAllDashboards();
+        getAllAdminDashboards();
     }, []);
 
-    return {loading, allDashboards};
+    return {loading, allAdminDashboards};
 
 }
