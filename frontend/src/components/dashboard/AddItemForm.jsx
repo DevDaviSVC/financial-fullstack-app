@@ -22,7 +22,7 @@ export default function AddItemForm () {
 
     return (
         <div className="bg-slate-700 bg-opacity-50 p-4 rounded-lg">
-            <h3 className="mb-4">Add new item to the dashboard</h3>
+            <h3 className="mb-4 text-xl font-medium">Add new item to the dashboard</h3>
             <form className="flex gap-4 items-end flex-wrap" onSubmit={handleSubmit}>
                 <div>
                     <label className="label label-text">Name</label>

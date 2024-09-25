@@ -35,7 +35,7 @@ export const deleteDashboard = async (req, res) => {
         if (!dashboard) return res.status(404).json({error: "Dashboard does not exist."});
 
         // verify if the user is the dashboard admin
-        const isAdmin = await Dashboard.find({
+        const isAdmin = await Dashboard.findOne({
             _id: dashboardId,
             admins: {$elemMatch: {$eq: userId}}
         });
@@ -60,7 +60,7 @@ export const updateDashboard = async (req, res) => {
         const { userId } = req.params;
 
         // verify if the user is a dashboard's collaborator
-        const isCollaborator = await Dashboard.find({
+        const isCollaborator = await Dashboard.findOne({
             _id: dashboardId,
             collaborators: { $elemMatch: { $eq: userId } }
         });
@@ -92,7 +92,7 @@ export const addCollaborator = async (req, res) => {
         const {adminId, newCollaboratorUsername} = req.body;
 
         // Verify if the adminId is listed on dashboard's admins list
-        const admin = await Dashboard.find({
+        const admin = await Dashboard.findOne({
             _id: dashboardId,
             admins: {$elemMatch: {$eq: adminId}}
         });
@@ -105,9 +105,9 @@ export const addCollaborator = async (req, res) => {
         // update dashboard collaborators
         const dashboard = await Dashboard.findOne({_id: dashboardId});
         const newCollaboratorsArr = [...dashboard.collaborators, newCollaborator._id];
-        await Dashboard.findOneAndUpdate({_id: dashboardId}, {collaborators: newCollaboratorsArr});
+        const updatedDashboard = await Dashboard.findOneAndUpdate({_id: dashboardId}, {collaborators: newCollaboratorsArr}, {new: true}).populate("collaborators").populate("admins");
 
-        res.status(200).json({message: `Collaborator ${newCollaborator.name} added successfully!`});
+        res.status(200).json({message: `Collaborator ${newCollaborator.name} added successfully!`, updatedDashboard});
 
     } catch (error) {
         console.log(error);
@@ -122,13 +122,13 @@ export const deleteCollaborator = async (req, res) => {
         const {adminId, collaboratorToRemoveUsername} = req.body;
 
         // Verify if the adminId is listed on dashboard's admins list
-        const admin = await Dashboard.find({
+        const admin = await Dashboard.findOne({
             _id: dashboardId,
             admins: {$elemMatch: {$eq: adminId}}
         });
         if (!admin) return res.status(401).json({error: "Unauthorized request: You are not an admin."});
 
-        // verify if newCollaborator exists
+        // verify if collaborator exists
         const collaboratorToRemove = await User.findOne({username: collaboratorToRemoveUsername});
         if (!collaboratorToRemove) return res.status(404).json({error: "Collaborator to delete does not exist."});
 

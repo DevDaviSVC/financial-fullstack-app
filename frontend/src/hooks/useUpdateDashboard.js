@@ -22,10 +22,12 @@ export default function useUpdatDashboard() {
             if (data.error) throw new Error(data.error);
 
             toast.success(data.message);
+            return true;
 
         } catch (error) {
             console.error(error.message);
             toast.error(error.message);
+            return false;
 
         } finally {
             setLoading(false);

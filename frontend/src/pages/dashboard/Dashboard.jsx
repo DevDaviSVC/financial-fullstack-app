@@ -8,6 +8,8 @@ import { useDashboardContext } from '../../contexts/dashboardContext';
 import { useNavigate } from "react-router-dom";
 import AddItemForm from '../../components/dashboard/AddItemForm';
 import formatDashboardInfo from '../../utils/formatDashboardInfo';
+import AddCollaboratorForm from '../../components/dashboard/AddCollaboratorForm';
+import DeleteDashboardBtn from '../../components/dashboard/DeleteDashboardBtn';
 
 export default function Dashboard() {
     const { dashboard } = useDashboardContext();
@@ -22,7 +24,7 @@ export default function Dashboard() {
     return (
         <>
             {dashboard && (
-                <div className='pt-32'>
+                <div className='pt-32 pb-4'>
                 <h1 className='text-5xl font-semibold mb-8'>Dashboard - {dashboard.name}</h1>
                 <div className='p-8 bg-blue-900 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 shadow flex flex-wrap flex-col gap-8'>
                     <div className="w-full flex gap-8">
@@ -51,26 +53,34 @@ export default function Dashboard() {
                         }
                     </div>
                     <AddItemForm />
-                    <div className='w-full flex gap-8 items-start'>
-                        <div className='collapse bg-slate-700 rounded-md w-[50%] bg-opacity-50'>
-                            <input type="checkbox" />
-                            <div className='collapse-title text-xl font-medium'>Collaborators</div>
-                            <div className="collapse-content">
-                                {dashboard.collaborators.map((collaborator) => (
-                                    <CollaboratorCollapse collaborator={collaborator} key={collaborator._id}/>
-                                ))}
+                    <div className='collapse collapse-arrow bg-slate-700 bg-opacity-50 rounded-lg'>
+                    <input type="checkbox" />
+                    <h1 className='collapse-title font-semibold text-2xl'>Dashboard Configurations</h1>
+                        <div className="collapse-content flex flex-col gap-8">
+                        <AddCollaboratorForm />
+                        <div className='w-full flex gap-8 items-start'>
+                            <div className='collapse bg-slate-500 rounded-md w-[50%] bg-opacity-50'>
+                                <input type="checkbox" />
+                                <div className='collapse-title text-xl font-medium'>Collaborators</div>
+                                <div className="collapse-content">
+                                    {dashboard.collaborators.map((collaborator) => (
+                                        <CollaboratorCollapse collaborator={collaborator} key={collaborator._id}/>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className='collapse bg-slate-500 rounded-md w-[50%] bg-opacity-50'>
+                                <input type="checkbox" />
+                                <div className='collapse-title text-xl font-medium'>Admins</div>
+                                <div className="collapse-content">
+                                    {dashboard.admins.map((admin) => (
+                                        <CollaboratorCollapse collaborator={admin} key={admin._id}/>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                        <div className='collapse bg-slate-700 rounded-md w-[50%] bg-opacity-50'>
-                            <input type="checkbox" />
-                            <div className='collapse-title text-xl font-medium'>Admins</div>
-                            <div className="collapse-content">
-                                {dashboard.admins.map((admin) => (
-                                    <CollaboratorCollapse collaborator={admin} key={admin._id}/>
-                                ))}
-                            </div>
                         </div>
                     </div>
+                    <DeleteDashboardBtn />
                 </div>
             </div>
             )}
