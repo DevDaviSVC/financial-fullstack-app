@@ -13,7 +13,7 @@ export const useGetAllAdminDashboards = () => {
     
             try {
     
-                const response = await fetch(`http://localhost:5000/api/dashboard/admin/${authUser._id}`);
+                const response = await fetch(`/api/dashboard/admin/${authUser?._id}`);
                 const data = await response.json();
     
                 if (data.error) throw new Error(data.error);

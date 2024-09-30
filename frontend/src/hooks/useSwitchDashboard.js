@@ -13,7 +13,7 @@ export const useSwitchDashboard = () => {
 
         try {
             
-            const response = await fetch(`http://localhost:5000/api/dashboard/one/${authUser._id}/${dashboardId}`);
+            const response = await fetch(`/api/dashboard/one/${authUser._id}/${dashboardId}`);
             const data = await response.json();
 
             if (data.error) throw new Error(data.error);

@@ -13,7 +13,7 @@ export default function useDeleteDashboard() {
 
     try {
       
-      const response = await fetch(`http://localhost:5000/api/dashboard/delete/${dashboard._id}/${authUser._id}`, {
+      const response = await fetch(`/api/dashboard/delete/${dashboard._id}/${authUser._id}`, {
         method: "DELETE",
       });
       const data = await response.json();

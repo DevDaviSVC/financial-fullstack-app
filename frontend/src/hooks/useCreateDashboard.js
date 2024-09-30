@@ -14,7 +14,7 @@ export const useCreateDashboard = () => {
         setLoading(true);
 
         try {
-            const response = await fetch(`http://localhost:5000/api/dashboard/create/${authUser._id}`, {
+            const response = await fetch(`/api/dashboard/create/${authUser._id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
