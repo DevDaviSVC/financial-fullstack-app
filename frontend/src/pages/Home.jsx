@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../contexts/authContext.jsx';
-import DashboardList from '../components/home/dashboardList.jsx';
+import DashboardList from '../components/home/DashboardList.jsx';
 import { FiPlus } from "react-icons/fi";
 import CreateDashboardForm from '../components/dashboard/CreateDashboardForm.jsx';
 import { useGetAllDashboards } from '../hooks/useGetAllDashboards.js';
