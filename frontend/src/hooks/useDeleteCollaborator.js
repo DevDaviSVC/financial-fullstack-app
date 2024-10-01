@@ -14,7 +14,7 @@ export default function useDeleteCollaborator() {
         try {
             
             const response = await fetch(`/api/dashboard/collaborators/${dashboard._id}`, {
-                method: "PUT",
+                method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
                 },

@@ -5,7 +5,6 @@ import { useDashboardContext } from "../contexts/dashboardContext";
 
 export default function useDeleteDashboard() {
   const [loading, setLoading] = useState(false);
-  const {authUser} = useAuthContext();
   const {dashboard, setDashboard} = useDashboardContext();
 
   const deleteDashboard = async () => {
@@ -13,12 +12,12 @@ export default function useDeleteDashboard() {
 
     try {
       
-      const response = await fetch(`/api/dashboard/delete/${dashboard._id}/${authUser._id}`, {
+      const response = await fetch(`/api/dashboard/delete/${dashboard._id}`, {
         method: "DELETE",
       });
       const data = await response.json();
 
-      if (data.error) throw new Error(daat.error);
+      if (data.error) throw new Error(data.error);
 
       setDashboard(null);
       toast.success(data.message);

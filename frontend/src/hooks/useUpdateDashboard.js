@@ -1,21 +1,19 @@
 import React, { useState } from 'react'
-import { useAuthContext } from '../contexts/authContext';
 import toast from 'react-hot-toast';
 
 export default function useUpdatDashboard() {
     const [loading, setLoading] = useState(false);
-    const {authUser} = useAuthContext();
 
     const updateDashboard = async (dashboard) => {
         setLoading(true);
 
         try {
-            const response = await fetch(`/api/dashboard/${authUser._id}`, {
+            const response = await fetch(`/api/dashboard/${dashboard._id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({dashboardId: dashboard._id, items: dashboard.items})
+                body: JSON.stringify({ items: dashboard.items})
             });
             const data = await response.json();
 

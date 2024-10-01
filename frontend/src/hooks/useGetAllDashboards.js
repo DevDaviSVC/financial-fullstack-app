@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react"
-import { useAuthContext } from "../contexts/authContext";
 import toast from "react-hot-toast";
 
 export const useGetAllDashboards = () => {
     const [loading, setLoading] = useState(false);
-    const {authUser} = useAuthContext();
     const [allDashboards, setAllDashboards] = useState([]);
 
     useEffect(() => {
@@ -13,7 +11,7 @@ export const useGetAllDashboards = () => {
     
             try {
     
-                const response = await fetch(`/api/dashboard/${authUser?._id}`);
+                const response = await fetch(`/api/dashboard`);
                 const data = await response.json();
     
                 if (data.error) throw new Error(data.error);

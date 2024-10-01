@@ -6,7 +6,6 @@ import { useSwitchDashboard } from "./useSwitchDashboard";
 
 export const useCreateDashboard = () => {
     const [loading, setLoading] = useState(false);
-    const { authUser } = useAuthContext();
     const navigate = useNavigate();
     const {switchDashboard} = useSwitchDashboard();
 
@@ -14,7 +13,7 @@ export const useCreateDashboard = () => {
         setLoading(true);
 
         try {
-            const response = await fetch(`/api/dashboard/create/${authUser._id}`, {
+            const response = await fetch(`/api/dashboard/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

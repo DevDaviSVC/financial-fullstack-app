@@ -6,7 +6,6 @@ import { useAuthContext } from '../contexts/authContext';
 export default function useAddCollaborator() {
     const [loading, setLoading] = useState(false);
     const {dashboard, setDashboard} = useDashboardContext();
-    const {authUser} = useAuthContext();
 
 
     const addCollaborator = async (newCollaboratorUsername) => {
@@ -20,7 +19,6 @@ export default function useAddCollaborator() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    adminId: authUser._id,
                     newCollaboratorUsername
                 })
             });

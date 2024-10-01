@@ -8,13 +8,13 @@ export const useDashboardContext = () => useContext(DashboardContext);
 export const DashboardContextProvider = ({children}) => {
     const [dashboard, setDashboard] = useState(null);
     const {authUser} = useAuthContext();
-    const authUserIsAdmin = useRef(dashboard?.admins.find(admin => admin === authUser._id) ? true : false);
+    const [authUserIsAdmin, setAuthUserIsAdmin] = useState(dashboard?.admins.find(admin => admin === authUser?._id) ? true : false);
 
     useEffect(() => {
         if (dashboard) {
-            authUserIsAdmin.current = dashboard.admins.find(admin => admin._id === authUser._id) ? true : false;
+            setAuthUserIsAdmin(dashboard.admins.find(admin => admin._id === authUser._id) ? true : false)
         } else {
-            authUserIsAdmin.current = false;
+            setAuthUserIsAdmin(false);
         }
     }, [dashboard]);
 
